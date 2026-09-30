@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IB Study Planner</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--ink:#172033;--muted:#6c7484;--line:#e7e9f0;--accent:#4f46e5}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink)}
+button,input,select{font:inherit}.app{display:grid;grid-template-columns:220px 1fr;min-height:100vh}.sidebar{background:#111827;color:#fff;padding:24px 16px}.brand{font-weight:800;font-size:20px;margin-bottom:24px}.brand small{display:block;color:#9ca3af;font-size:12px;margin-top:4px}.nav button{display:block;width:100%;text-align:left;border:0;background:transparent;color:#d1d5db;padding:11px 12px;border-radius:10px;margin:4px 0;cursor:pointer}.nav button.active,.nav button:hover{background:#1f2937;color:#fff}.main{padding:26px;max-width:1400px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:20px}.top h1{margin:0;font-size:30px}.top p{color:var(--muted);margin:5px 0}.pill{background:#eef2ff;color:#3730a3;padding:8px 11px;border-radius:999px;font-size:12px;font-weight:800}.grid{display:grid;gap:14px}.kpis{grid-template-columns:repeat(3,1fr);margin-bottom:16px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:0 2px 8px rgba(0,0,0,.03)}.kpi span,.meta{color:var(--muted);font-size:12px}.kpi strong{display:block;font-size:26px;margin-top:6px}.section-title{display:flex;justify-content:space-between;align-items:center;margin:10px 0}.section-title h2{margin:0;font-size:18px}.task{border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:14px;padding:14px;margin:10px 0}.task.done{opacity:.5}.task h3{margin:0 0 4px;font-size:16px}.steps{display:grid;gap:6px;margin-top:10px}.step{font-size:14px}.goal{background:#f8fafc;border-radius:10px;padding:9px 10px;margin-top:10px;font-size:13px;font-weight:700}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.btn{border:1px solid var(--line);background:#fff;padding:8px 10px;border-radius:9px;cursor:pointer}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}.weekbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.weekgrid{display:grid;grid-template-columns:repeat(7,minmax(150px,1fr));gap:10px;overflow:auto}.day{background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px;min-height:260px}.day.today{outline:2px solid var(--accent)}.day h4{margin:0}.date{font-size:12px;color:var(--muted);margin:3px 0 8px}.mini{padding:7px 8px;border-radius:8px;margin:6px 0;font-size:12px;border-left:4px solid var(--accent);background:#f8fafc}.busy{border-left-color:#111827;background:#f3f4f6}.gym{border-left-color:#06b6d4;background:#ecfeff}.match{border-left-color:#f59e0b;background:#fffbeb}.deadline{display:grid;grid-template-columns:100px 1fr auto;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.tag{font-size:11px;font-weight:800;padding:5px 8px;border-radius:999px;background:#f3f4f6}.subject{display:grid;grid-template-columns:180px 1fr 150px;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}.notice{background:#eef2ff;color:#3730a3;padding:10px;border-radius:10px;font-size:13px;margin-bottom:12px}.hidden{display:none!important}
+@media(max-width:900px){.app{grid-template-columns:1fr}.sidebar{padding:12px}.brand{margin-bottom:8px}.nav{display:flex;overflow:auto}.nav button{width:auto;white-space:nowrap}.main{padding:14px}.kpis{grid-template-columns:1fr}.weekgrid{grid-template-columns:repeat(7,210px)}.subject,.deadline{grid-template-columns:1fr}.top{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+<div class="brand">IB Study Planner<small>Kaan's personal study OS</small></div>
+<div class="nav">
+<button class="active" data-view="today">Today</button>
+<button data-view="week">Week</button>
+<button data-view="deadlines">Deadlines</button>
+<button data-view="subjects">Subjects</button>
+</div>
+</aside>
+<main class="main">
+<section id="todayView"></section>
+<section id="weekView" class="hidden"></section>
+<section id="deadlinesView" class="hidden"></section>
+<section id="subjectsView" class="hidden"></section>
+</main>
+</div>
+<script>
+var COLORS={math:"#7c3aed",physics:"#2563eb",econ:"#059669",business:"#d97706",english:"#db2777",turkish:"#dc2626"};
+var subjects=[
+{id:"math",name:"Math",level:"HL",topic:"Algebra",stage:"ongoing",color:COLORS.math},
+{id:"physics",name:"Physics",level:"HL",topic:"Kinematics",stage:"started",color:COLORS.physics},
+{id:"econ",name:"Economics",level:"HL",topic:"Price Mechanism",stage:"finished",color:COLORS.econ},
+{id:"business",name:"Business",level:"SL",topic:"Vision, Mission, Strategies & Tactics",stage:"ongoing",color:COLORS.business},
+{id:"english",name:"English",level:"SL",topic:"Writing",stage:"ongoing",color:COLORS.english},
+{id:"turkish",name:"Turkish",level:"SL",topic:"Deneme / Essay Writing",stage:"ongoing",color:COLORS.turkish}
+];
+var deadlines=[
+{id:"tur-portfolio",subject:"turkish",title:"Upload Turkish Portfolio",date:"2026-10-02",type:"homework"},
+{id:"math-quiz",subject:"math",title:"Math HL Quiz",date:"2026-10-05",type:"quiz"},
+{id:"tur-reading",subject:"turkish",title:"Read Şeyh Bedrettin Destanı",date:"2026-10-05",type:"reading"},
+{id:"econ-quiz",subject:"econ",title:"Economics HL Quiz",date:"2026-10-06",type:"quiz"},
+{id:"physics-quiz",subject:"physics",title:"Physics HL Quiz",date:"2026-10-06",type:"quiz"},
+{id:"physics-lab",subject:"physics",title:"Physics Lab Assignment",date:"2026-10-06",type:"lab"},
+{id:"business-quiz",subject:"business",title:"Business SL Quiz",date:"2026-10-13",type:"quiz"}
+];
+var fixedEvents=[
+{date:"2026-09-28",title:"Basketball",start:"20:00",end:"21:00",kind:"busy"},
+{date:"2026-10-02",title:"Basketball Fundamental",start:"16:00",end:"17:00",kind:"busy"},
+{date:"2026-10-03",title:"Basketball",start:"17:00",end:"18:00",kind:"busy"},
+{date:"2026-10-04",title:"Padel",start:"20:00",end:"21:00",kind:"busy"},
+{date:"2026-09-30",title:"Gym",start:"18:00",end:"19:00",kind:"gym"},
+{date:"2026-10-04",title:"Gym",start:"18:00",end:"19:00",kind:"gym"},
+{date:"2026-10-02",title:"Fenerbahçe Beko — Match vs Dubai Basketball",start:"20:45",end:"22:45",kind:"match"},
+{date:"2026-10-04",title:"Fenerbahçe Beko — Match vs Manisa Basket",start:"15:30",end:"17:30",kind:"match"},
+{date:"2026-10-08",title:"Fenerbahçe Beko — Match at Panathinaikos",start:"21:15",end:"23:15",kind:"match"},
+{date:"2026-10-10",title:"Fenerbahçe — Football Match at Çaykur Rizespor",start:"19:00",end:"21:00",kind:"match"},
+{date:"2026-10-10",title:"Fenerbahçe Beko — Match at Çayırova Belediyesi",start:"19:30",end:"21:30",kind:"match"},
+{date:"2026-10-13",title:"Fenerbahçe Beko — Match vs Zalgiris Kaunas",start:"20:45",end:"22:45",kind:"match"},
+{date:"2026-10-14",title:"Fenerbahçe — Football Match at Aston Villa",start:"22:00",end:"23:59",kind:"match"},
+{date:"2026-10-15",title:"Fenerbahçe Beko — Match vs Partizan",start:"20:45",end:"22:45",kind:"match"},
+{date:"2026-10-17",title:"Fenerbahçe — Football Match vs Alanyaspor",start:"19:00",end:"21:00",kind:"match"},
+{date:"2026-10-20",title:"Fenerbahçe — Football Match vs Slavia Praha",start:"19:45",end:"21:45",kind:"match"},
+{date:"2026-10-26",title:"Fenerbahçe — Football Match at Galatasaray",start:"21:30",end:"23:30",kind:"match"},
+{date:"2026-10-31",title:"Fenerbahçe — Football Match vs Göztepe",start:"19:00",end:"21:00",kind:"match"}
+];
+var state=JSON.parse(localStorage.getItem("ib-planner-state")||'{"done":{},"topics":{}}');
+subjects.forEach(function(s){if(state.topics[s.id]){s.topic=state.topics[s.id].topic;s.stage=state.topics[s.id].stage}});
+function save(){localStorage.setItem("ib-planner-state",JSON.stringify(state))}
+function pdate(s){return new Date(s+"T12:00:00")}
+function ld(d){var x=new Date(d.getTime()-d.getTimezoneOffset()*60000);return x.toISOString().slice(0,10)}
+function add(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x}
+function monday(d){var x=new Date(d),k=(x.getDay()+6)%7;x.setDate(x.getDate()-k);x.setHours(12,0,0,0);return x}
+function fmt(s,o){return pdate(s).toLocaleDateString("en-GB",o||{month:"short",day:"numeric"})}
+function subj(id){return subjects.find(function(s){return s.id===id})}
+function padel(date){var d=pdate(date).getDay();return d===2||d===4}
+function events(date){var a=fixedEvents.filter(function(e){return e.date===date}).slice();if(padel(date)&&!a.some(function(e){return e.title==="Padel"&&e.start==="16:00"}))a.push({date:date,title:"Padel",start:"16:00",end:"17:00",kind:"busy"});return a}
+function gyms(mon){
+ var key=ld(mon);if(key==="2026-09-28")return fixedEvents.filter(function(e){return e.kind==="gym"});
+ var c=[{i:0,s:"18:00"},{i:2,s:"18:00"},{i:4,s:"18:00"},{i:6,s:"17:00"}],out=[];
+ c.forEach(function(x){if(out.length>=3)return;var date=ld(add(mon,x.i));if(events(date).some(function(e){return e.start===x.s}))return;var h=(parseInt(x.s.slice(0,2))+1).toString().padStart(2,"0")+":00";out.push({date:date,title:"Gym",start:x.s,end:h,kind:"gym"})});return out;
+}
+function actions(sid,type){
+ if(type==="quiz"&&sid==="math")return["Review Algebra notes and 1 worked example","Solve 8 Algebra questions","Mark and redo every wrong question"];
+ if(type==="quiz"&&sid==="physics")return["Review Kinematics definitions and formulas","Solve 5 exam-style questions","Mark them and note 2 weak points"];
+ if(type==="quiz"&&sid==="econ")return["Write Price Mechanism definitions from memory","Draw 2 supply/demand diagrams","Answer 1 exam-style question and mark it"];
+ if(type==="quiz"&&sid==="business")return["Review Vision vs Mission vs Strategy vs Tactics","Make a 4-row comparison table","Answer 2 short case/application questions"];
+ if(type==="lab")return["Finish data table and calculations","Create or check the first graph","Write findings and list what is missing"];
+ if(type==="reading")return["Read today's target section","Write 5 bullet notes","Do a 2-minute recall without looking"];
+ if(type==="homework")return["Finish remaining required work","Check formatting and missing parts","Final proofread and upload-ready check"];
+ if(sid==="english")return["Continue the current writing piece","Write one full paragraph","Edit topic sentence, evidence and clarity"];
+ if(sid==="turkish")return["Choose a deneme focus","Make a short outline","Write or revise one paragraph"];
+ if(sid==="business")return["Review today's Business notes","Write 3 key distinctions from memory","Do 1 application question"];
+ if(sid==="econ")return["Review Price Mechanism definitions","Draw 2 diagrams from memory","Do 1 short response"];
+ if(sid==="physics")return["Review Kinematics formulas","Solve 4 introductory questions","Note unclear points"];
+ return["Review today's Algebra notes","Solve 6 practice questions","Check and redo mistakes"];
+}
+function plan(start,days){
+ var out={},i;for(i=0;i<days;i++)out[ld(add(start,i))]=[];
+ var from=ld(start),to=ld(add(start,days-1));
+ deadlines.forEach(function(d){if(d.date<from||d.date>to)return;var lead=d.type==="quiz"?5:d.type==="lab"?4:2,total=d.type==="quiz"?4:d.type==="lab"?3:2,c=0,b;for(b=lead;b>=1&&c<total;b--){var date=ld(add(pdate(d.date),-b));if(!out[date])continue;out[date].push({id:d.id+"-"+date,subject:d.subject,title:d.title,type:d.type,deadline:d.date,actions:actions(d.subject,d.type)});c++}});
+ var order=["math","physics","econ","math","business","physics","english","econ","turkish"];
+ for(i=0;i<days;i++){var date=ld(add(start,i)),arr=out[date],dow=pdate(date).getDay(),target=arr.length===0?(dow===6?2:1):0;for(var j=0;j<target;j++){var sid=order[(i+j)%order.length];arr.push({id:"topic-"+sid+"-"+date,subject:sid,title:subj(sid).topic,type:"topic",deadline:null,actions:actions(sid,"topic")})}}
+ return out;
+}
+var weekOffset=0;
+function anchor(){return monday(new Date("2026-09-30T12:00:00"))}
+function taskHTML(t){
+ var s=subj(t.subject),done=!!state.done[t.id],m=t.deadline?"For deadline: "+fmt(t.deadline,{weekday:"short",month:"short",day:"numeric"}):"Current topic: "+s.topic;
+ return '<article class="task '+(done?"done":"")+'" style="border-left-color:'+s.color+'"><h3>'+s.name+' '+s.level+' — '+t.title+'</h3><div class="meta">'+m+'</div><div class="steps">'+t.actions.map(function(a){return '<div class="step">☐ '+a+'</div>'}).join("")+'</div><div class="goal">Finish this: complete the actions above and correct your mistakes.</div><div class="actions"><button class="btn primary doneBtn" data-id="'+t.id+'">'+(done?"Completed ✓":"Done")+'</button><button class="btn">Need more time</button><button class="btn">Couldn\'t do it</button></div></article>';
+}
+function bind(){document.querySelectorAll(".doneBtn").forEach(function(b){b.onclick=function(){state.done[b.dataset.id]=!state.done[b.dataset.id];save();renderAll()}})}
+function renderToday(){
+ var today="2026-09-30",pl=plan(pdate(today),28)[today]||[],done=pl.filter(function(x){return state.done[x.id]}).length,soon=deadlines.filter(function(d){var z=(pdate(d.date)-pdate(today))/86400000;return z>=0&&z<=7}).length;
+ document.getElementById("todayView").innerHTML='<div class="top"><div><h1>Today</h1><p>Wednesday, 30 September 2026 · concrete actions, not vague study blocks</p></div><span class="pill">Goal: IB 40</span></div><div class="grid kpis"><div class="card kpi"><span>Focused tasks</span><strong>'+pl.length+'</strong></div><div class="card kpi"><span>Completed</span><strong>'+done+'/'+pl.length+'</strong></div><div class="card kpi"><span>Upcoming deadlines</span><strong>'+soon+'</strong></div></div><div class="section-title"><h2>Do these next</h2><span class="meta">Deadline work first</span></div><div class="card">'+pl.map(taskHTML).join("")+'</div>';bind();
+}
+function renderWeek(){
+ var mon=add(anchor(),weekOffset*7),key=ld(mon),pl=plan(mon,28),gs=gyms(mon),html="";
+ for(var i=0;i<7;i++){var d=ld(add(mon,i)),its=pl[d]||[],ev=events(d).concat(gs.filter(function(g){return g.date===d}));html+='<div class="day '+(d==="2026-09-30"?"today":"")+'"><h4>'+pdate(d).toLocaleDateString("en-GB",{weekday:"short"})+'</h4><div class="date">'+fmt(d)+'</div>'+ev.map(function(e){return '<div class="mini '+e.kind+'">'+e.start+'–'+e.end+'<br><b>'+e.title+'</b></div>'}).join("")+its.map(function(t){return '<div class="mini" style="border-left-color:'+subj(t.subject).color+'"><b>'+subj(t.subject).name+'</b><br>'+(t.type==="topic"?t.title:"Prep: "+t.title)+'</div>'}).join("")+'</div>'}
+ document.getElementById("weekView").innerHTML='<div class="top"><div><h1>Week</h1><p>Study planned around sport, gym and matches.</p></div><span class="pill">Rolling 4-week plan</span></div>'+(weekOffset>0?'<div class="notice">Auto-generated plan — updates when deadlines, topics or sports change.</div>':'')+'<div class="weekbar"><button class="btn" id="prev">← Previous</button><strong>'+fmt(key,{month:"long",day:"numeric"})+' – '+fmt(ld(add(mon,6)),{month:"long",day:"numeric"})+'</strong><div><button class="btn" id="regen">Regenerate week</button> <button class="btn" id="next">Next →</button></div></div><div class="weekgrid">'+html+'</div>';
+ document.getElementById("prev").onclick=function(){weekOffset=Math.max(0,weekOffset-1);renderWeek()};document.getElementById("next").onclick=function(){weekOffset=Math.min(3,weekOffset+1);renderWeek()};document.getElementById("regen").onclick=renderWeek;
+}
+function renderDeadlines(){
+ document.getElementById("deadlinesView").innerHTML='<div class="top"><div><h1>Deadlines</h1><p>Real dates stay fixed. Preparation is planned before them.</p></div></div><div class="card">'+deadlines.slice().sort(function(a,b){return a.date.localeCompare(b.date)}).map(function(d){var s=subj(d.subject);return '<div class="deadline"><strong>'+fmt(d.date,{month:"short",day:"numeric"})+'</strong><div><b>'+d.title+'</b><div class="meta">'+s.name+' '+s.level+' · '+s.topic+'</div></div><span class="tag">'+d.type.toUpperCase()+'</span></div>'}).join("")+'</div>';
+}
+function renderSubjects(){
+ document.getElementById("subjectsView").innerHTML='<div class="top"><div><h1>Subjects</h1><p>Update topics when class moves on; the plan adapts.</p></div></div><div class="card">'+subjects.map(function(s){return '<div class="subject"><div><span class="dot" style="background:'+s.color+'"></span><b>'+s.name+' '+s.level+'</b></div><input data-topic="'+s.id+'" value="'+s.topic+'"><select data-stage="'+s.id+'"><option value="started" '+(s.stage==="started"?"selected":"")+'>Just started</option><option value="ongoing" '+(s.stage==="ongoing"?"selected":"")+'>In progress</option><option value="finished" '+(s.stage==="finished"?"selected":"")+'>Just finished</option></select></div>'}).join("")+'</div>';
+ document.querySelectorAll("[data-topic]").forEach(function(x){x.onchange=function(){var s=subj(x.dataset.topic);s.topic=x.value;state.topics[s.id]={topic:s.topic,stage:s.stage};save();renderAll()}});document.querySelectorAll("[data-stage]").forEach(function(x){x.onchange=function(){var s=subj(x.dataset.stage);s.stage=x.value;state.topics[s.id]={topic:s.topic,stage:s.stage};save();renderAll()}});
+}
+function renderAll(){renderToday();renderWeek();renderDeadlines();renderSubjects()}
+document.querySelectorAll(".nav button").forEach(function(b){b.onclick=function(){document.querySelectorAll(".nav button").forEach(function(x){x.classList.remove("active")});b.classList.add("active");["today","week","deadlines","subjects"].forEach(function(v){document.getElementById(v+"View").classList.toggle("hidden",v!==b.dataset.view)})}});
+renderAll();
+</script>
+</body>
+</html>
