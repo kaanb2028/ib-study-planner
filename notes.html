@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Study Notes — IB Study Planner</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--ink:#172033;--muted:#6c7484;--line:#e7e9f0;--accent:#4f46e5;--math:#7c3aed;--physics:#2563eb;--econ:#059669;--business:#d97706}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink)}
+.app{display:grid;grid-template-columns:230px 1fr;min-height:100vh}.side{background:#111827;color:#fff;padding:24px 16px;position:sticky;top:0;height:100vh}.brand{font-size:20px;font-weight:800;margin-bottom:22px}.brand small{display:block;color:#9ca3af;font-size:12px;margin-top:4px}.side a{display:block;color:#d1d5db;text-decoration:none;padding:11px 12px;border-radius:10px;margin:4px 0}.side a:hover,.side a.active{background:#1f2937;color:white}.main{padding:28px;max-width:1200px;width:100%;margin:auto}.top h1{margin:0;font-size:32px}.top p{color:var(--muted);max-width:800px}.subject-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}.tab{border:1px solid var(--line);background:#fff;border-radius:14px;padding:15px;cursor:pointer;font-weight:800;text-align:left}.tab.active{outline:2px solid var(--accent);background:#eef2ff}.panel{display:none}.panel.active{display:block}.unit{background:#fff;border:1px solid var(--line);border-radius:16px;margin:14px 0;overflow:hidden}.unit summary{cursor:pointer;padding:18px;font-size:18px;font-weight:850;list-style:none}.unit summary::-webkit-details-marker{display:none}.unit .body{padding:0 18px 18px}.topic{border-top:1px solid var(--line);padding:14px 0}.topic:first-child{border-top:0}.topic h3{margin:0 0 7px;font-size:16px}.topic p{margin:6px 0;line-height:1.55}.topic ul{margin:7px 0 0 20px;line-height:1.55}.formula{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.exam{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:10px 12px;margin-top:9px}.source-note{background:#eef2ff;color:#3730a3;border-radius:12px;padding:12px 14px;font-size:13px;margin-top:16px}.badge{display:inline-block;font-size:10px;font-weight:800;background:#f3f4f6;border-radius:999px;padding:4px 7px;margin-left:6px}
+@media(max-width:850px){.app{grid-template-columns:1fr}.side{position:relative;height:auto}.side nav{display:grid;grid-template-columns:repeat(2,1fr)}.subject-tabs{grid-template-columns:1fr 1fr}.main{padding:16px}}
+</style>
+</head>
+<body><div class="app">
+<aside class="side"><div class="brand">IB Study Planner<small>Kaan's personal study OS</small></div><nav>
+<a href="./">Today</a><a href="./">Week</a><a href="./">Deadlines</a><a href="./">Subjects</a><a href="./">Classroom</a>
+<a class="active" href="notes.html">📚 Study Notes</a><a href="quiz.html">🧠 Take Quiz</a><a href="mistakes.html">❌ Mistake Bank</a><a href="coach.html">✨ AI Study Coach</a>
+</nav></aside>
+<main class="main">
+<div class="top"><h1>📚 Study Notes</h1><p>Revision notes built only from the materials you have sent so far. New notes will be added underneath the existing units instead of replacing them.</p></div>
+<div class="source-note"><b>Living notes system:</b> when you send a new file, the matching subject/unit will be extended below the current summaries.</div>
+<div class="subject-tabs">
+<button class="tab active" data-p="math">📐 Math AA HL</button>
+<button class="tab" data-p="physics">⚛️ Physics HL</button>
+<button class="tab" data-p="econ">📈 Economics HL</button>
+<button class="tab" data-p="business">💼 Business SL</button>
+</div>
+
+<section id="math" class="panel active">
+<details class="unit" open><summary>Unit 1 — Algebra and Function Basics <span class="badge">AA HL</span></summary><div class="body">
+<div class="topic"><h3>1. Lines, gradients and systems</h3><p>Know the main forms of a straight-line equation, how gradient and intercepts are read, and how parallel/perpendicular relationships work.</p><div class="formula">y = mx + c &nbsp; | &nbsp; parallel: m₁ = m₂ &nbsp; | &nbsp; perpendicular: m₁m₂ = −1</div><ul><li>Solve systems of linear equations analytically and graphically.</li><li>Interpret an intersection as a simultaneous solution.</li></ul></div>
+<div class="topic"><h3>2. Functions: domain, range and notation</h3><p>A function maps each allowed input to exactly one output. You need to identify domain, range, graph and function notation correctly.</p><ul><li>Recognise different function types.</li><li>Use composite functions such as f(g(x)).</li><li>Find inverse functions when the function is one-to-one or suitably restricted.</li><li>Understand self-inverse functions.</li></ul></div>
+<div class="topic"><h3>3. Rational, radical and absolute-value functions</h3><p>Focus on domains, excluded values, asymptotes and the effect of absolute value on graphs.</p><div class="exam"><b>IB focus:</b> be able to move between algebraic rules and graph behaviour, not just manipulate formulas.</div></div>
+<div class="topic"><h3>4. Quadratic functions</h3><p>Know standard, factorised and vertex forms, and use them to identify roots, axis of symmetry, intercepts and vertex.</p><div class="formula">ax² + bx + c = 0 &nbsp; | &nbsp; x = (−b ± √(b²−4ac))/(2a)</div><ul><li>Discriminant: b²−4ac determines the nature of roots.</li><li>Use sum/product of roots when appropriate.</li><li>Solve quadratic equations and inequalities analytically and graphically.</li></ul></div>
+<div class="topic"><h3>5. Graph transformations</h3><p>Recognise translations, stretches/compressions and reflections, including composite transformations.</p><ul><li>Special attention: y = |f(x)|, y = f(|x|) and reciprocal-type graph behaviour.</li></ul></div>
+</div></details>
+
+<details class="unit"><summary>Unit 2 — Polynomial Functions</summary><div class="body">
+<div class="topic"><h3>1. Polynomial structure and graphs</h3><p>A polynomial has non-negative integer powers of x. Degree, leading coefficient and roots determine much of its graph.</p><ul><li>Even-degree power graphs have broadly U-shaped end behaviour; odd-degree power graphs have broadly S-shaped end behaviour.</li><li>Identify constant, linear, quadratic and cubic forms.</li></ul></div>
+<div class="topic"><h3>2. Zeros, roots and factors</h3><p>If P(a)=0, then x−a is a factor. Connect x-intercepts on the graph with algebraic roots.</p><div class="formula">Factor theorem: P(a)=0 ⇔ (x−a) is a factor</div></div>
+<div class="topic"><h3>3. Remainder theorem and polynomial equations</h3><p>Use substitution to obtain remainders and factorisation to solve higher-degree equations and inequalities.</p><div class="formula">Remainder when dividing by (x−a) = P(a)</div></div>
+<div class="topic"><h3>4. Sum and product of roots</h3><p>Use relationships between coefficients and roots to solve problems without always finding each root directly.</p></div>
+<div class="topic"><h3>5. Complex numbers</h3><p>The unit includes complex numbers as part of the toolkit for polynomial equations and roots.</p></div>
+</div></details>
+
+<details class="unit"><summary>Unit 3 — Sequences and Series</summary><div class="body">
+<div class="topic"><h3>1. Arithmetic sequences</h3><p>Each term changes by a constant common difference d.</p><div class="formula">uₙ = a + (n−1)d</div><p>Arithmetic sequences can be interpreted as linear models because each increase of 1 in n changes the term by d.</p></div>
+<div class="topic"><h3>2. Geometric sequences and series</h3><p>Each term is obtained by multiplying by a constant common ratio r.</p><div class="formula">uₙ = arⁿ⁻¹ &nbsp; | &nbsp; Sₙ = a(1−rⁿ)/(1−r)</div><p>For an infinite geometric series, a finite sum exists only when |r| &lt; 1.</p><div class="formula">S∞ = a/(1−r), for |r| &lt; 1</div></div>
+<div class="topic"><h3>3. Sigma notation</h3><p>Use Σ notation to represent and manipulate sums efficiently.</p></div>
+<div class="topic"><h3>4. Binomial theorem</h3><p>Expand powers using binomial coefficients and identify individual terms. The material also includes validity of certain series expansions.</p></div>
+<div class="topic"><h3>5. Counting principles</h3><p>Work with permutations and combinations as part of the unit.</p></div>
+</div></details>
+
+<details class="unit"><summary>Unit 4 — Exponents and Logarithms</summary><div class="body">
+<div class="topic"><h3>1. Exponential functions</h3><p>The basic form is y=aˣ where a&gt;0 and a≠1. The graph approaches y=0 but does not reach it, so y=0 is a horizontal asymptote.</p><ul><li>Understand exponential growth and decay.</li><li>Connect exponential models to applications.</li><li>Understand the importance of e.</li></ul></div>
+<div class="topic"><h3>2. Logarithmic functions</h3><p>Logarithms are inverses of exponential functions. Use logarithm laws to simplify expressions and solve equations.</p><div class="formula">logₐ(xy)=logₐx+logₐy &nbsp; | &nbsp; logₐ(x/y)=logₐx−logₐy &nbsp; | &nbsp; logₐ(xᵏ)=klogₐx</div></div>
+<div class="topic"><h3>3. Solving exponential and logarithmic equations</h3><p>Use equivalent bases where possible; otherwise apply logarithms and check domain restrictions for logarithmic expressions.</p></div>
+</div></details>
+
+<details class="unit"><summary>Unit 5 — Proofs</summary><div class="body">
+<div class="topic"><h3>Proof unit</h3><p>Your Math notes identify Proofs as Unit 5. I am keeping this section as the unit placeholder until we extract the specific proof methods/examples from the material in a later pass, rather than inventing content not yet retrieved from the source.</p></div>
+</div></details>
+</section>
+
+<section id="physics" class="panel">
+<details class="unit" open><summary>A.1 — Kinematics <span class="badge">HL & SL</span></summary><div class="body">
+<div class="topic"><h3>1. One-dimensional motion</h3><p>Kinematics describes motion without explaining the forces causing it. Your material covers displacement, velocity, graphs, relative motion and SUVAT equations.</p></div>
+<div class="topic"><h3>2. Scalars and vectors</h3><ul><li><b>Distance:</b> total path length; scalar.</li><li><b>Displacement:</b> change in position from start to finish; vector.</li><li><b>Speed:</b> distance/time; scalar.</li><li><b>Velocity:</b> displacement/time; vector.</li></ul></div>
+<div class="topic"><h3>3. Motion graphs</h3><p>Interpret gradients and areas rather than memorising shapes.</p><ul><li>Gradient of displacement–time graph → velocity.</li><li>Gradient of velocity–time graph → acceleration.</li><li>Area under velocity–time graph → displacement.</li></ul><div class="exam"><b>IB focus:</b> a curved graph requires tangent/secant reasoning for instantaneous vs average rates.</div></div>
+<div class="topic"><h3>4. SUVAT variables</h3><div class="formula">s = displacement, u = initial velocity, v = final velocity, a = acceleration, t = time</div><p>SUVAT is valid only for constant (uniform) acceleration.</p></div>
+<div class="topic"><h3>5. SUVAT equations</h3><div class="formula">v = u + at<br>s = ((u+v)/2)t<br>s = ut + ½at²<br>v² = u² + 2as</div><p>Each equation omits one variable. The method in your notes is: list known values, identify the unknown, then select the equation that excludes the unused variable.</p></div>
+<div class="topic"><h3>6. Relative motion</h3><p>The A.1 material includes relative motion in 1D and 2D. We will expand this subsection when the next batch of Physics notes is added.</p></div>
+</div></details>
+</section>
+
+<section id="econ" class="panel">
+<details class="unit" open><summary>Unit 1 — Introduction to Economics</summary><div class="body">
+<div class="topic"><h3>1. Nature of economics</h3><p>Economics studies how societies use scarce resources to produce goods and services, satisfy unlimited needs and wants, and distribute output among groups.</p></div>
+<div class="topic"><h3>2. Microeconomics vs Macroeconomics</h3><ul><li><b>Microeconomics:</b> individual consumers, firms, choices and market interactions.</li><li><b>Macroeconomics:</b> the economy as a whole using aggregates such as total output, employment and overall price level.</li></ul></div>
+<div class="topic"><h3>3. Scarcity, choice and sustainability</h3><p>Scarcity exists because resources are finite while wants are unlimited. Scarcity forces choice, and every choice creates an opportunity cost. Sustainability concerns preserving the ability of the economy and environment to satisfy needs and wants in the future.</p></div>
+<div class="topic"><h3>4. Factors of production</h3><ul><li>Land</li><li>Labour</li><li>Capital — including physical, human, natural and financial capital in your slides</li><li>Entrepreneurship</li></ul></div>
+<div class="topic"><h3>5. Opportunity cost</h3><p>The value/benefit of the next best alternative forgone when a choice is made.</p></div>
+<div class="topic"><h3>6. Three basic economic questions</h3><ul><li>What/how much to produce?</li><li>How to produce?</li><li>For whom to produce?</li></ul></div>
+<div class="topic"><h3>7. Economic systems</h3><p>Compare free market, planned and mixed market systems through ownership, decision-making and rationing mechanisms.</p></div>
+<div class="topic"><h3>8. Production Possibility Curve (PPC)</h3><p>The PPC shows maximum combinations of two goods that can be produced with given resources and technology when resources are fully employed and efficiently used.</p><ul><li>Inside PPC: unemployment/inefficiency.</li><li>On PPC: productive efficiency.</li><li>Outside PPC: currently unattainable.</li><li>Moving along PPC demonstrates opportunity cost.</li><li>Outward shift: growth in production possibilities.</li></ul><div class="exam"><b>Important distinction:</b> actual growth can mean moving closer to the existing PPC; growth in production possibilities shifts the PPC outward.</div></div>
+<div class="topic"><h3>9. Positive vs normative economics</h3><p>Positive statements are testable/descriptive claims; normative statements contain value judgments about what ought to happen.</p></div>
+</div></details>
+
+<details class="unit"><summary>Unit 2 — Microeconomics: Competitive Markets</summary><div class="body">
+<div class="topic"><h3>1. Demand</h3><p>Demand is the quantity consumers are willing and able to buy at different prices over a given period.</p><ul><li>Law of demand: price ↑ → quantity demanded ↓, ceteris paribus.</li><li>A change in own price causes movement along the demand curve.</li><li>A non-price determinant causes a shift of the demand curve.</li></ul></div>
+<div class="topic"><h3>2. Supply</h3><p>Supply is the quantity producers are willing and able to offer at different prices over a given period.</p><ul><li>A change in own price creates movement along supply.</li><li>Non-price determinants shift the whole supply curve.</li></ul></div>
+<div class="topic"><h3>3. Market equilibrium and disequilibrium</h3><p>Equilibrium occurs where quantity demanded equals quantity supplied. At the old price after a curve shift, excess demand or excess supply creates price signals that push the market toward a new equilibrium.</p></div>
+<div class="topic"><h3>4. Changes in demand and supply</h3><p>Your slides emphasise reading the chain of adjustment:</p><div class="formula">curve shifts → shortage/surplus at old price → price signal → movements along curves → new equilibrium</div></div>
+<div class="topic"><h3>5. Price mechanism: signals, incentives and resource allocation</h3><p>Prices transmit information and create incentives. Higher prices can signal scarcity and encourage producers to expand output; lower prices can signal excess supply and discourage production.</p></div>
+<div class="topic"><h3>6. Allocative efficiency</h3><div class="formula">Demand = Marginal Benefit (MB)<br>Supply = Marginal Cost (MC)<br>Allocative efficiency: MB = MC</div><p>At allocative efficiency, society produces the quantity where the marginal benefit from the last unit equals its marginal cost.</p></div>
+<div class="topic"><h3>7. Consumer, producer and community surplus</h3><ul><li><b>Consumer surplus:</b> willingness to pay minus price actually paid.</li><li><b>Producer surplus:</b> price received minus minimum price producers were willing to accept.</li><li><b>Community surplus:</b> consumer surplus + producer surplus.</li></ul><p>The HL material includes calculation of these areas using triangles and trapezia.</p></div>
+<div class="topic"><h3>8. Critique of maximizing behaviour (HL)</h3><p>Your Competitive Markets file continues into a critique of producer and consumer maximizing behaviour and cognitive bias. This section is marked for expansion when we extract the detailed slides in the next pass.</p></div>
+</div></details>
+</section>
+
+<section id="business" class="panel">
+<details class="unit" open><summary>Unit 1.1 — What is a Business?</summary><div class="body">
+<div class="topic"><h3>1. Nature of business</h3><p>A business is a decision-making organization that uses inputs to produce goods and/or provide services.</p><div class="formula">Inputs → Processes → Outputs</div><ul><li>Inputs: land, labour, capital, enterprise.</li><li>Processes: HR, finance, marketing, operations management.</li><li>Outputs: goods and services.</li></ul></div>
+<div class="topic"><h3>2. Functional areas</h3><p>Human resources, finance, operations management and marketing are interdependent; they must coordinate to achieve organizational goals.</p></div>
+<div class="topic"><h3>3. Sectors of industry</h3><ul><li><b>Primary:</b> extraction/raw materials.</li><li><b>Secondary:</b> manufacturing/conversion into finished products.</li><li><b>Tertiary:</b> services.</li><li><b>Quaternary:</b> knowledge creation/distribution.</li></ul><p>The chain of production links extraction → manufacturing → services → consumer.</p></div>
+<div class="topic"><h3>4. Added value</h3><p>Your notes define added value as the difference between the final selling price and the original/input cost.</p></div>
+<div class="topic"><h3>5. Customer vs consumer</h3><p><b>Customer:</b> buys the product. <b>Consumer:</b> uses the product.</p></div>
+<div class="topic"><h3>6. Entrepreneurship</h3><p>An entrepreneur plans, organizes and manages a business while taking financial risk. Your notes stress leadership, risk-taking, innovation, ambition, creativity, communication and self-motivation.</p></div>
+</div></details>
+
+<details class="unit"><summary>Unit 1.2 — Types of Business Entities</summary><div class="body">
+<div class="topic"><h3>1. Private vs public sector</h3><p>Private-sector organizations are owned and controlled by private individuals/businesses. Public-sector organizations are owned/controlled by government and often provide essential services.</p></div>
+<div class="topic"><h3>2. Sole traders</h3><p>One owner, usually easy and inexpensive to establish, but generally unincorporated with unlimited liability.</p></div>
+<div class="topic"><h3>3. Partnerships</h3><p>Two or more owners share finance, responsibilities and profits/losses. A deed of partnership can define roles, contributions and distribution of profit/loss.</p></div>
+<div class="topic"><h3>4. Privately vs publicly held companies</h3><p>Companies are incorporated and have a separate legal identity. Shareholders benefit from limited liability. A privately held company's shares are not traded publicly; a publicly held company can sell shares on a public stock exchange.</p></div>
+<div class="topic"><h3>5. Social enterprises and NGOs</h3><p>Social enterprises place social objectives at the core of operations while still generating revenue. Your materials include private/public sector social enterprises, cooperatives and non-profit NGOs.</p></div>
+</div></details>
+
+<details class="unit"><summary>Unit 1.3 — Business Objectives</summary><div class="body">
+<div class="topic"><h3>1. Vision statement</h3><p>A vision statement describes the organization's long-term aspiration — what it wants to become in the distant future. It gives direction and helps unify decisions and culture.</p></div>
+<div class="topic"><h3>2. Mission statement</h3><p>A mission statement expresses the organization's underlying purpose and core values — what the business does and why it exists. It is generally more immediate than a vision and is qualitative rather than a timed numerical target.</p></div>
+<div class="topic"><h3>3. Vision vs mission</h3><ul><li>Vision: “What do we want to become?”</li><li>Mission: “What is our business / why do we exist?”</li><li>Vision is very long-term; mission is more connected to current purpose and daily guiding values.</li></ul></div>
+<div class="topic"><h3>4. Common business objectives</h3><p>Your Unit 1.3 specification includes growth, profit, protecting shareholder value and ethical objectives.</p></div>
+<div class="topic"><h3>5. Strategic vs tactical objectives</h3><p><b>Strategic objectives</b> are longer-term, organization-wide directions. <b>Tactical objectives</b> are shorter-term, more specific actions used to implement strategy.</p><div class="exam"><b>IB application:</b> in case studies, classify the level of an objective and then judge whether the tactic actually supports the firm's mission and strategy.</div></div>
+<div class="topic"><h3>6. Corporate social responsibility (CSR)</h3><p>CSR is included in your Unit 1.3 content and links business objectives to responsibilities toward stakeholders and society.</p></div>
+</div></details>
+</section>
+
+</main></div>
+<script>
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.p).classList.add('active')});
+</script>
+</body></html>
