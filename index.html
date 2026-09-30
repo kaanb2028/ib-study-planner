@@ -78,10 +78,10 @@ function monday(d){var x=new Date(d),k=(x.getDay()+6)%7;x.setDate(x.getDate()-k)
 function fmt(s,o){return pdate(s).toLocaleDateString("en-GB",o||{month:"short",day:"numeric"})}
 function subj(id){return subjects.find(function(s){return s.id===id})}
 function padel(date){var d=pdate(date).getDay();return d===2||d===4}
-function events(date){var a=fixedEvents.filter(function(e){return e.date===date}).slice();if(padel(date)&&!a.some(function(e){return e.title==="Padel"&&e.start==="16:00"}))a.push({date:date,title:"Padel",start:"16:00",end:"17:00",kind:"busy"});return a}
+function events(date){var a=fixedEvents.filter(function(e){return e.date===date}).slice();if(padel(date)&&!a.some(function(e){return e.title==="Padel"&&e.start==="16:00"}))a.push({date:date,title:"Padel",start:"16:00",end:"17:00",kind:"busy"});if(pdate(date).getDay()===5&&!a.some(function(e){return e.title==="English Lesson"&&e.start==="18:00"}))a.push({date:date,title:"English Lesson",start:"18:00",end:"20:00",kind:"busy"});return a}
 function gyms(mon){
  var key=ld(mon);if(key==="2026-09-28")return [];
- var c=[{i:0,s:"18:00"},{i:2,s:"18:00"},{i:4,s:"18:00"},{i:6,s:"17:00"}],out=[];
+ var c=[{i:0,s:"18:00"},{i:2,s:"18:00"},{i:5,s:"18:00"},{i:6,s:"17:00"}],out=[];
  c.forEach(function(x){if(out.length>=3)return;var date=ld(add(mon,x.i));if(events(date).some(function(e){return e.start===x.s}))return;var h=(parseInt(x.s.slice(0,2))+1).toString().padStart(2,"0")+":00";out.push({date:date,title:"Gym",start:x.s,end:h,kind:"gym"})});return out;
 }
 function actions(sid,type){
