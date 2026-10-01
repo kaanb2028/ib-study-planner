@@ -1,0 +1,38 @@
+name: Fix calendar navigation
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-calendar-nav.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace old Week links with Calendar everywhere
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          for p in Path('.').glob('*.html'):
+              s=p.read_text()
+              old=s
+              s=s.replace('<a href="./">Week</a>', '<a href="calendar.html">Calendar</a>')
+              s=s.replace('<a href="./" >Week</a>', '<a href="calendar.html">Calendar</a>')
+              s=s.replace('<a href="./" class="active">Week</a>', '<a href="calendar.html" class="active">Calendar</a>')
+              if s != old:
+                  p.write_text(s)
+                  print('updated',p)
+          PY
+      - name: Commit fixes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add '*.html'
+          if git diff --cached --quiet; then
+            echo 'No changes needed'
+          else
+            git commit -m 'Make Calendar navigation available on all pages'
+            git push
+          fi
