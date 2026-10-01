@@ -1,0 +1,1 @@
+Force GitHub Pages redeploy so the current Week view with the visible + Add event controls is published.
