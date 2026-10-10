@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-10T12:38:00+03:00",
+  "updated_at": "2026-10-10T09:43:06.873Z",
   "items": [
     {
       "id": "manual-english-writing-2026-10-11",
@@ -7,7 +7,7 @@
       "title": "English Writing Assignment",
       "type": "homework",
       "date": "2026-10-11",
-      "time": null,
+      "time": "23:59",
       "source": "manual"
     }
   ]
