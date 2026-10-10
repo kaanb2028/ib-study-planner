@@ -1,4 +1,14 @@
 {
-  "updated_at": null,
-  "items": []
+  "updated_at": "2026-10-10T12:38:00+03:00",
+  "items": [
+    {
+      "id": "manual-english-writing-2026-10-11",
+      "subject": "english",
+      "title": "English Writing Assignment",
+      "type": "homework",
+      "date": "2026-10-11",
+      "time": null,
+      "source": "manual"
+    }
+  ]
 }
